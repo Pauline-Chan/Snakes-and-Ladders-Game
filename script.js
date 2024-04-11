@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', () => {
     const board = document.getElementById('board');
     const rollBtn = document.getElementById('rollBtn');
@@ -133,37 +134,60 @@ function createBoard() {
             ladderTile.classList.add('ladder');
         });
     }
+ 
+    const previousPositions = [[], []]; // Array to store previous positions of each player
 
+function movePlayer(playerIndex, steps) {
+    let previousPosition = players[playerIndex].position;
+    let newPosition = previousPosition + steps;
 
-    function movePlayer(playerIndex, steps) {
-        let newPosition = players[playerIndex].position + steps;
+    // Check for snake and ladder positions
+    snakes.forEach(snake => {
+        if (newPosition === snake.start) {
+            newPosition = snake.end;
+            // Play sound effect for landing on snake's head
+            const snakeSound = new Audio('snake_sound.mp3');
+            snakeSound.play();
+        }
+    });
 
-        // Check for snake and ladder positions
-        snakes.forEach(snake => {
-            if (newPosition === snake.start) {
-                newPosition = snake.end;
-                // Play sound effect for landing on snake's head
-                const snakeSound = new Audio('snake_sound.mp3');
-                snakeSound.play();
-            }
-        });
+    ladders.forEach(ladder => {
+        if (newPosition === ladder.start) {
+            newPosition = ladder.end;
+            // Play sound effect for landing on ladder's bottom
+            const ladderSound = new Audio('ladder_sound.mp3');
+            ladderSound.play();
+        }
+    });
 
-        ladders.forEach(ladder => {
-            if (newPosition === ladder.start) {
-                newPosition = ladder.end;
-                // Play sound effect for landing on ladder's bottom
-                const ladderSound = new Audio('ladder_sound.mp3');
-                ladderSound.play();
-            }
-        });
+    // Update player's position
+    players[playerIndex].position = newPosition > 100 ? 100 : newPosition;
 
-        // Update player's position
-        players[playerIndex].position = newPosition > 100 ? 100 : newPosition;
-
-        const currentPlayerToken = document.getElementById(`player${playerIndex}`);
-        currentPlayerToken.style.top = `${(9 - Math.floor((players[playerIndex].position - 1) / 10)) * 50}px`; // Starting from bottom
-        currentPlayerToken.style.left = `${((9 - (players[playerIndex].position - 1) % 10)) * 50}px`; // Starting from right
+    // Store previous position
+    previousPositions[playerIndex].unshift(previousPosition);
+    if (previousPositions[playerIndex].length > 2) {
+        previousPositions[playerIndex].pop(); // Keep only the last two positions
     }
+
+    const currentPlayerToken = document.getElementById(`player${playerIndex}`);
+    currentPlayerToken.style.top = `${(9 - Math.floor((players[playerIndex].position - 1) / 10)) * 50}px`; // Starting from bottom
+    currentPlayerToken.style.left = `${((9 - (players[playerIndex].position - 1) % 10)) * 50}px`; // Starting from right
+
+    // Display previous positions on the webpage
+    displayPreviousPositions();
+}
+
+function displayPreviousPositions() {
+    const previousPositionsDiv = document.getElementById('previousPositions');
+    previousPositionsDiv.innerHTML = ''; // Clear the previous positions display
+
+    previousPositions.forEach((positions, index) => {
+        const playerPrevPositionDiv = document.createElement('div');
+        playerPrevPositionDiv.textContent = `Player ${index + 1} Previous Positions: ${positions.join(', ')}`;
+        previousPositionsDiv.appendChild(playerPrevPositionDiv);
+    });
+}
+  
 
     function rollDice() {
         return Math.floor(Math.random() * 6) + 1;
@@ -177,15 +201,37 @@ function createBoard() {
         }
     }
 
+    function updatePlayerPositions() {
+        const playerPositionsDiv = document.getElementById('playerPositions');
+        playerPositionsDiv.innerHTML = ''; // Clear the previous positions display
+    
+        players.forEach((player, index) => {
+            const playerPositionDiv = document.createElement('div');
+            playerPositionDiv.textContent = `Player ${index + 1} Current Position: ${player.position}`;
+            playerPositionsDiv.appendChild(playerPositionDiv);
+        });
+    }
+    
     function playTurn() {
         if (!gameOver) {
             const steps = rollDice();
             alert(`Player ${currentPlayer + 1} rolled ${steps}`);
             movePlayer(currentPlayer, steps);
             checkWin(currentPlayer);
+    
+            // Display current roll result and positions on the webpage
+            displayCurrentRoll(steps);
+            updatePlayerPositions();
+    
             currentPlayer = (currentPlayer + 1) % players.length;
         }
     }
+    
+    function displayCurrentRoll(roll) {
+        const currentRollDiv = document.getElementById('currentRoll');
+        currentRollDiv.textContent = `Current Roll: ${roll}`;
+    }
+    
 
     rollBtn.addEventListener('click', playTurn);
 
