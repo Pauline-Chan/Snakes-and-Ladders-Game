@@ -1,14 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
     const board = document.getElementById('board');
     const rollBtn = document.getElementById('rollBtn');
-    const players = [{ position: 0, color: 'red' }, { position: 0, color: 'blue' }]; // Add more players as needed
+    const players = [
+        { position: 0, color: 'rgba(255, 0, 0, 0.5)' }, // Red color with 50% opacity
+        { position: 0, color: 'rgba(0, 0, 255, 0.5)' } // Blue color with 50% opacity
+];
+    // Add more players as needed
     let currentPlayer = 0;
     let gameOver = false;
 
     // Define snake and ladder pairs
     const snakes = [
         { start: 99, end: 41 },
-	{ start: 89, end: 53 },
+	    { start: 89, end: 53 },
         { start: 76, end: 58 },
         { start: 66, end: 45 },
         { start: 54, end: 31 },
@@ -27,13 +31,95 @@ document.addEventListener('DOMContentLoaded', () => {
         { start: 74, end: 92 }
     ];
 
- function createBoard() {
-        for (let i = 100; i >= 1; i--) {
-            const tile = document.createElement('div');
-            tile.classList.add('tile');
-            tile.textContent = i;
-            board.appendChild(tile);
+function createBoard() {
+    for (let i = 100; i >= 1; i--) {
+        const tile = document.createElement('div');
+        tile.classList.add('tile');
+        tile.textContent = i;
+        
+        // Check if the current tile number matches any special numbers
+        if ([3, 40].includes(i)) {
+            tile.classList.add('special-tile1a');
         }
+ 
+           // Check if the current tile number matches any special numbers
+        if ([5, 27].includes(i)) {
+            tile.classList.add('special-tile1b');
+        }      
+            
+    // Check if the current tile number matches any special numbers
+        if ([43, 18].includes(i)) {
+            tile.classList.add('special-tile1c');
+        }                  
+
+  // Check if the current tile number matches any special numbers
+        if ([54, 31].includes(i)) {
+            tile.classList.add('special-tile1d');
+        }            
+
+   // Check if the current tile number matches any special numbers
+        if ([66, 45].includes(i)) {
+            tile.classList.add('special-tile1e');
+        }            
+  
+    // Check if the current tile number matches any special numbers
+        if ([76, 58].includes(i)) {
+            tile.classList.add('special-tile1f');
+        }            
+  
+   // Check if the current tile number matches any special numbers
+        if ([89, 53].includes(i)) {
+            tile.classList.add('special-tile1g');
+        }            
+  
+   // Check if the current tile number matches any special numbers
+        if ([99, 41].includes(i)) {
+            tile.classList.add('special-tile1h');
+        }             
+  
+        
+        // Check if the current tile number matches any other special numbers
+        if ([4, 25].includes(i)) {
+            tile.classList.add('special-tile2a');
+        }
+        
+     
+        // Check if the current tile number matches any other special numbers
+        if ([13, 46].includes(i)) {
+            tile.classList.add('special-tile2b');
+        }
+        
+      // Check if the current tile number matches any other special numbers
+        if ([33, 49].includes(i)) {
+            tile.classList.add('special-tile2c');
+        }
+        
+      // Check if the current tile number matches any other special numbers
+        if ([42, 63].includes(i)) {
+            tile.classList.add('special-tile2d');
+        }
+        
+       // Check if the current tile number matches any other special numbers
+        if ([50, 69].includes(i)) {
+            tile.classList.add('special-tile2e');
+        }
+        
+       // Check if the current tile number matches any other special numbers
+        if ([62, 81].includes(i)) {
+            tile.classList.add('special-tile2f');
+        }
+        
+      // Check if the current tile number matches any other special numbers
+        if ([74, 92].includes(i)) {
+            tile.classList.add('special-tile2g');
+        }             
+                     
+               board.appendChild(tile);
+    }
+    // Rest of the code...
+
+
+
 
         // Highlight snake tiles
         snakes.forEach(snake => {

@@ -1,3 +1,7 @@
+.container {
+    display: inline-block;
+}
+
 #board {
     width: 500px;
     height: 500px;
@@ -15,10 +19,128 @@
     line-height: 48px;
 }
 
-  
+#rollBtn {
+    background-color: orange;
+    font-size: 40px;
+    color: white;
+    font-family: Verdana;
+    border-radius: 5px;
+   
+}
+
+#button {
+    margin: 30px;
+}
+
+.table {
+    display: flex;
+    padding: 10px 10px 10px 10px;
+}
+
+#table1 {
+    margin: 20px;
+    background-color:rgb(226, 185, 245)
+}
+
+#table2 {
+    margin: 20px;
+    background-color: rgb(175, 227, 210);
+}
+
+th {
+    font-size: 30px;
+    font-family: 'Trebuchet MS';
+    color: black;
+}
+
+td {
+    padding: 5px;
+}
+
+#table1 td {
+    border: 1px solid;
+    font-size: 20px;
+    font-family: 'Trebuchet MS';
+    font-weight: 200px;
+    color: blue;
+}
+
+#table2 td {
+    border: 1px solid;
+    font-size: 20px;
+    font-family: 'Trebuchet MS';
+    font-weight: 200px;
+    color: rgb(236, 1, 64);
+}
+
+.special-tile1a {
+    background-color: yellow;
+}
+
+.special-tile1b {
+    background-color: pink;
+}
+
+.special-tile1c {
+    background-color: brown;
+}
+
+.special-tile1d {
+    background-color: orange;
+}
+
+.special-tile1e {
+    background-color: magenta;
+}
+
+.special-tile1f {
+    background-color: lightgreen;
+}
+
+.special-tile1g {
+    background-color: #C89D7C;
+}
+
+.special-tile1h {
+    background-color: #ffffcc;
+}
+
+
+.special-tile2a {
+    background-color: green;
+}
+
+.special-tile2b {
+    background-color: lightblue;
+}
+
+.special-tile2c {
+    background-color: purple;
+}
+
+.special-tile2d {
+    background-color: rgb(171, 104, 202);
+}
+
+.special-tile2e {
+    background-color: grey;
+}
+
+.special-tile2f {
+    background-color: #009999;
+}
+
+.special-tile2g {
+    background-color: lightgrey;
+}
+
+
+
+/*  
 .snake, .ladder {
     background-color: green;
 }
+*/
 
 .player {
     width: 40px;
@@ -27,8 +149,5 @@
     position: absolute;
 }
 
-#rollBtn {
-    font-size: 40px;
-    font-color: red;
-    font-family: Verdana;
-}
+
+
