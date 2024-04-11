@@ -202,13 +202,16 @@ function displayPreviousPositions() {
     function checkWin(playerIndex) {
         if (players[playerIndex].position === 100) {
             gameOver = true;
-            // Play sound effect for winning the game
             const winSound = new Audio('win_sound.mp3');
             winSound.play();
-            alert(`Player ${playerIndex + 1} wins!`);
+            const winnerDisplay = document.getElementById('winnerDisplay');
+            const winnerText = document.getElementById('winnerText');
+            winnerText.textContent = `Player ${playerIndex + 1} wins!`;
+            winnerDisplay.style.display = 'block';
             rollBtn.disabled = true;
         }
     }
+    
     
 
     function updatePlayerPositions() {

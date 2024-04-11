@@ -2,6 +2,19 @@
     display: inline-block;
 }
 
+h2 {
+    font-family: 'Trebuchet MS';
+    font-size: 30px;
+    font-weight: 200px;
+    color: rgb(255, 0, 0);
+}
+
+#winnerText {
+    font-family: 'Trebuchet MS';
+    font-size: 20px;
+    color: red;
+}
+
 #board {
     width: 500px;
     height: 500px;
@@ -19,6 +32,13 @@
     line-height: 48px;
 }
 
+.wrap {
+    display: flex;
+    justify-content: center;
+    
+
+}
+
 #rollBtn {
     background-color: orange;
     font-size: 40px;
@@ -27,7 +47,7 @@
     border-radius: 5px;
     box-shadow: 4px 9px #002d81;
     position: relative;
-    left: 360px;
+    left: 160px;
    
 }
 
@@ -89,13 +109,13 @@ button {
 
 #table1 {
     margin: 20px;
-    background-color:rgb(226, 185, 245);
+    background-color:rgb(100, 245, 166);
     width: 300px;
 }
 
 #table2 {
     margin: 20px;
-    background-color: rgb(175, 227, 210);
+    background-color: rgb(245, 248, 79);
 }
 
 th {

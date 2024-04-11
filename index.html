@@ -8,8 +8,15 @@
 </head>
 <body>
 <div class="container">
-    <div id="board"></div>        
+    <div id="board"></div>
+    <div class="wrap">
+    <div id="winnerDisplay" style="display: none;">
+        <h2>Winner!</h2>
+        <img id="winnerImage" src="winning_animation.gif" alt="Winner Animation">
+        <p id="winnerText"></p>
+    </div>        
     <div id="button"><button id="rollBtn">Roll Dice</button></div>
+</div>
     <div id="previousPositions"></div>
     <div id="currentRoll"></div>
     <div id="playerPositions"></div>
