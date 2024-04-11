@@ -2,6 +2,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const board = document.getElementById('board');
     const rollBtn = document.getElementById('rollBtn');
+    
     const players = [
         { position: 0, color: 'rgba(255, 0, 0, 0.5)' }, // Red color with 50% opacity
         { position: 0, color: 'rgba(0, 0, 255, 0.5)' } // Blue color with 50% opacity
@@ -137,44 +138,49 @@ function createBoard() {
  
     const previousPositions = [[], []]; // Array to store previous positions of each player
 
-function movePlayer(playerIndex, steps) {
-    let previousPosition = players[playerIndex].position;
-    let newPosition = previousPosition + steps;
+    function movePlayer(playerIndex, steps) {
+        let previousPosition = players[playerIndex].position;
+        let newPosition = previousPosition + steps;
+    
+        // Check for snake and ladder positions
+        snakes.forEach(snake => {
+            if (newPosition === snake.start) {
+                newPosition = snake.end;
+                // Play sound effect for landing on snake's head
+                const snakeSound = new Audio('snake_sound.mp3');
+                snakeSound.play();
+            }
+        });
+    
+        ladders.forEach(ladder => {
+            if (newPosition === ladder.start) {
+                newPosition = ladder.end;
+                // Play sound effect for landing on ladder's bottom
+                const ladderSound = new Audio('ladder_sound.mp3');
+                ladderSound.play();
+            }
+        });
 
-    // Check for snake and ladder positions
-    snakes.forEach(snake => {
-        if (newPosition === snake.start) {
-            newPosition = snake.end;
-            // Play sound effect for landing on snake's head
-            const snakeSound = new Audio('snake_sound.mp3');
-            snakeSound.play();
-        }
-    });
+  // Update player's position
+  if (newPosition > 100) {
+    // If newPosition exceeds 100, bounce back from 100
+    newPosition = 100 - (newPosition - 100);
+}
 
-    ladders.forEach(ladder => {
-        if (newPosition === ladder.start) {
-            newPosition = ladder.end;
-            // Play sound effect for landing on ladder's bottom
-            const ladderSound = new Audio('ladder_sound.mp3');
-            ladderSound.play();
-        }
-    });
+players[playerIndex].position = newPosition;
 
-    // Update player's position
-    players[playerIndex].position = newPosition > 100 ? 100 : newPosition;
+// Store previous position
+previousPositions[playerIndex].unshift(previousPosition);
+if (previousPositions[playerIndex].length > 2) {
+    previousPositions[playerIndex].pop(); // Keep only the last two positions
+}
 
-    // Store previous position
-    previousPositions[playerIndex].unshift(previousPosition);
-    if (previousPositions[playerIndex].length > 2) {
-        previousPositions[playerIndex].pop(); // Keep only the last two positions
-    }
+const currentPlayerToken = document.getElementById(`player${playerIndex}`);
+currentPlayerToken.style.top = `${(9 - Math.floor((players[playerIndex].position - 1) / 10)) * 50}px`; // Starting from bottom
+currentPlayerToken.style.left = `${((9 - (players[playerIndex].position - 1) % 10)) * 50}px`; // Starting from right
 
-    const currentPlayerToken = document.getElementById(`player${playerIndex}`);
-    currentPlayerToken.style.top = `${(9 - Math.floor((players[playerIndex].position - 1) / 10)) * 50}px`; // Starting from bottom
-    currentPlayerToken.style.left = `${((9 - (players[playerIndex].position - 1) % 10)) * 50}px`; // Starting from right
-
-    // Display previous positions on the webpage
-    displayPreviousPositions();
+// Display previous positions on the webpage
+displayPreviousPositions();
 }
 
 function displayPreviousPositions() {
@@ -194,12 +200,16 @@ function displayPreviousPositions() {
     }
 
     function checkWin(playerIndex) {
-        if (players[playerIndex].position >= 100) {
+        if (players[playerIndex].position === 100) {
             gameOver = true;
+            // Play sound effect for winning the game
+            const winSound = new Audio('win_sound.mp3');
+            winSound.play();
             alert(`Player ${playerIndex + 1} wins!`);
             rollBtn.disabled = true;
         }
     }
+    
 
     function updatePlayerPositions() {
         const playerPositionsDiv = document.getElementById('playerPositions');

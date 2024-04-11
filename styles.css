@@ -25,23 +25,49 @@
     color: white;
     font-family: Verdana;
     border-radius: 5px;
+    box-shadow: 4px 9px #002d81;
+    position: relative;
+    left: 360px;
    
 }
 
-#button {
-    margin: 30px;
+#rollBtn:focus {
+    outline-style: none;
 }
+
+#rollBtn:hover {
+    background-color: #009aff
+}
+
+#rollBtn:active {
+    background-color: #002d81;
+    box-shadow: 0 5px #666;
+    transform: translateX(6px) translateY(2px);
+}
+
+button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+#button {
+    margin: 20px;
+}
+
 
 #previousPositions {
     font-size: 25px;
     font-family: 'Trebuchet Ms';
     color: green;
+    position: relative;
+    left: 100px;
 }   
 
 #currentRoll {
     font-size: 25px;
     font-family: 'Trebuchet Ms';
     color: red;
+    position: relative;
+    left: 100px;
 
 }
 
@@ -49,15 +75,22 @@
     font-size: 25px;
     font-family: 'Trebuchet Ms';
     color: green;
+    position: relative;
+    left: 100px;
 }
 .table {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
     padding: 5px 5px 5px 5px;
+    position: relative;
+    left: 80px;
 }
 
 #table1 {
     margin: 20px;
-    background-color:rgb(226, 185, 245)
+    background-color:rgb(226, 185, 245);
+    width: 300px;
 }
 
 #table2 {
