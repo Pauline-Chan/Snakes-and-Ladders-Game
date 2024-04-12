@@ -2,18 +2,28 @@
     display: inline-block;
 }
 
+wrap {
+    display: flex;
+    width: 600px;
+}
+
+
 h2 {
     font-family: 'Trebuchet MS';
     font-size: 30px;
     font-weight: 200px;
     color: rgb(255, 0, 0);
+    text-align: center;
+    
 }
 
-#winnerText {
+p {
     font-family: 'Trebuchet MS';
-    font-size: 20px;
+    font-size: 30px;
     color: red;
+    text-align: center;
 }
+
 
 #board {
     width: 500px;
@@ -21,6 +31,8 @@ h2 {
     border: 2px solid black;
     margin: 20px auto;
     position: relative;
+    font-family: 'Trebuchet MS'
+    
 }
 
 .tile {
@@ -32,15 +44,19 @@ h2 {
     line-height: 48px;
 }
 
-.wrap {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+#winnerDisplay {
+    display: inline-block;
     
+}
+
+#winnerDisplay img {
+    position: relative;
+    left: 200px;
 
 }
 
-#rollBtn {
+#rollBtn {   
     background-color: orange;
     font-size: 40px;
     color: white;
@@ -48,7 +64,7 @@ h2 {
     border-radius: 5px;
     box-shadow: 4px 9px #002d81;
     position: relative;
-    left: 100px;
+    left: 250px;
     align-content: center;
    
 }
@@ -66,6 +82,33 @@ h2 {
     box-shadow: 0 5px #666;
     transform: translateX(6px) translateY(2px);
 }
+
+#restartBtn {
+    background-color: orange;
+    font-size: 40px;
+    color: white;
+    font-family: Verdana;
+    border-radius: 5px;
+    box-shadow: 4px 9px #002d81;
+    position: relative;
+    left: 250px;
+    align-content: center;
+}
+
+#restartBtn:focus {
+    outline-style: none;
+}
+
+#restartBtn:hover {
+    background-color: #009aff
+}
+
+#restartBtn:active {
+    background-color: #002d81;
+    box-shadow: 0 5px #666;
+    transform: translateX(6px) translateY(2px);
+}
+
 
 button {
     -webkit-tap-highlight-color: transparent;
@@ -99,6 +142,7 @@ button {
     color: green;
     position: relative;
     left: 100px;
+    margin-bottom: 20px;
 }
 .table {
     display: grid;
@@ -106,18 +150,18 @@ button {
     gap: 20px;
     padding: 5px 5px 5px 5px;
     position: relative;
-    left: 80px;
+    left: 30px;
+    text-align: left;
 }
 
 #table1 {
-    margin: 20px;
     background-color:rgb(100, 245, 166);
     width: 300px;
 }
 
 #table2 {
-    margin: 20px;
-    background-color: rgb(245, 248, 79);
+   background-color: rgb(245, 248, 79);
+   width: 300px;
 }
 
 th {

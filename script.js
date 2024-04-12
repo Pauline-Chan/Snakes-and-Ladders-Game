@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', () => {
     const board = document.getElementById('board');
     const rollBtn = document.getElementById('rollBtn');
@@ -208,12 +207,52 @@ function displayPreviousPositions() {
             const winnerText = document.getElementById('winnerText');
             winnerText.textContent = `Player ${playerIndex + 1} wins!`;
             winnerDisplay.style.display = 'block';
-            rollBtn.disabled = true;
+            rollBtn.style.display = 'none'; // Hide roll dice button
+            restartBtn.style.display = 'inline-block'; // Display restart game button
         }
     }
     
+    // Function to restart the game
+    function restartGame() {
+        // Reset player positions to zero
+        players.forEach(player => {
+            player.position = 0;
+        });
     
-
+        // Clear the current roll display
+        clearCurrentRoll();
+    
+        // Clear the previous positions display
+        clearPreviousPositions();
+    
+        // Update the player positions on the webpage
+        updatePlayerPositions();
+    
+        // Reset game state and display settings
+        gameOver = false;
+        rollBtn.style.display = 'inline-block'; // Display roll dice button
+        restartBtn.style.display = 'none'; // Hide restart game button
+        const winnerDisplay = document.getElementById('winnerDisplay');
+        winnerDisplay.style.display = 'none'; // Hide winner display
+    }
+    
+    function clearCurrentRoll() {
+        const currentRollDiv = document.getElementById('currentRoll');
+        currentRollDiv.textContent = ''; // Clear the current roll display
+    }
+    
+    function clearPreviousPositions() {
+        const previousPositionsDiv = document.getElementById('previousPositions');
+        previousPositionsDiv.innerHTML = ''; // Clear the previous positions display
+    }
+    
+    
+    
+    // Add event listener for restart button
+    const restartBtn = document.getElementById('restartBtn');
+    restartBtn.addEventListener('click', restartGame);
+    
+    
     function updatePlayerPositions() {
         const playerPositionsDiv = document.getElementById('playerPositions');
         playerPositionsDiv.innerHTML = ''; // Clear the previous positions display
