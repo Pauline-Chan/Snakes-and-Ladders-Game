@@ -264,17 +264,29 @@ function displayPreviousPositions() {
         });
     }
     
+let soundEnabled = true;    
+
+function playDiceRollSound() {
+    if (soundEnabled) {
+        const diceRollSound = new Audio('dice_roll.mp3');
+        diceRollSound.play();
+    }
+}
+
+
     function playTurn() {
         if (!gameOver) {
             const steps = rollDice();
-            alert(`Player ${currentPlayer + 1} rolled ${steps}`);
             movePlayer(currentPlayer, steps);
             checkWin(currentPlayer);
-    
+            displayDiceRoll(steps);
+            playDiceRollSound(); // Play sound effect for dice roll
+
             // Display current roll result and positions on the webpage
             displayCurrentRoll(steps);
             updatePlayerPositions();
-    
+
+
             currentPlayer = (currentPlayer + 1) % players.length;
         }
     }
@@ -283,6 +295,30 @@ function displayPreviousPositions() {
         const currentRollDiv = document.getElementById('currentRoll');
         currentRollDiv.textContent = `Current Roll: ${roll}`;
     }
+
+
+    function displayDiceRoll(steps) {
+        const rollDiv = document.getElementById(`player${currentPlayer + 1}Roll`);
+        rollDiv.innerHTML = ''; // Clear previous roll display
+    
+        // Create red dot buttons representing the rolled dice number
+        for (let i = 0; i < steps; i++) {
+            const dotButton = document.createElement('button');
+            dotButton.classList.add('red-dot');
+            rollDiv.appendChild(dotButton);
+        }
+    }
+    
+    // Reset roll display when game restarts
+    function clearDiceRoll() {
+        const rollDivs = document.querySelectorAll('[id^=player][id$=Roll]');
+        rollDivs.forEach(rollDiv => {
+            rollDiv.innerHTML = '';
+        });
+    }
+    
+    
+    
     
 
     rollBtn.addEventListener('click', playTurn);
