@@ -211,9 +211,13 @@ function displayPreviousPositions() {
             restartBtn.style.display = 'inline-block'; // Display restart game button
         }
     }
-    
+ 
+
     // Function to restart the game
     function restartGame() {
+    // Play sound effect for restarting the game
+    playRestartSound();
+
         // Reset player positions to zero
         players.forEach(player => {
             player.position = 0;
@@ -273,6 +277,12 @@ function playDiceRollSound() {
     }
 }
 
+function playRestartSound() {
+    if (soundEnabled) { 
+    const restartSound = new Audio('restart_sound.mp3');
+    restartSound.play();
+    }
+}
 
     function playTurn() {
         if (!gameOver) {

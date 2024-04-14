@@ -37,7 +37,7 @@ p {
     position: relative;
     height: 120px;
     width: 120px;
-    left: 330px;
+    left: 200px;
     background-color: rgb(255, 47, 161);
     border-radius: 40px;
 }
@@ -46,7 +46,7 @@ p {
     position: relative;
     height: 120px;
     width: 120px;
-    left: 330px;
+    left: 200px;
     background-color: rgb(81, 157, 244);
     border-radius: 40px;
 }
